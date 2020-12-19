@@ -1,6 +1,219 @@
 let GL = null;
 const { mat4, mat3, vec2, vec3, vec4, quat } = glMatrix;
 
+const pyramidObj = `
+# Blender OBJ File: /home/william/Documents/Blender/pyramid2.obj
+# www.blender.org
+
+#StarLogoCommand ComputeNormals
+
+mtllib pyramid2.mtl
+
+o o_Plane_Plane_o_Plane_Plane
+v -2.79999995232 -2.10000014305 -2.7999997139
+v -2.80000090599 -2.10000014305 2.79999923706
+v 2.79999947548 -2.09999966621 2.79999995232
+v 2.7999997139 -2.09999966621 -2.80000019073
+v -5.51132018245e-07 2.87229824066 -1.66892974107e-07
+v -2.79467940331 -2.09685015678 2.79822540283
+v 2.79467797279 -2.09684967995 2.79822611809
+v -5.51339951471e-07 2.86599826813 0.00354754924774
+v -2.79909920692 -2.0984005928 -2.79729771614
+v -2.7991001606 -2.0984005928 2.7972972393
+v -0.00180196762085 2.86909937859 -1.66938988855e-07
+v -2.78854846954 -2.09322142601 -2.79618263245
+v 2.78854823112 -2.09322094917 -2.79618310928
+v -5.49954393136e-07 2.858741045 -0.0076345205307
+v 2.7947371006 -2.09065461159 2.78421282768
+v 2.79473733902 -2.09065461159 -2.7842130661
+v 0.0105241537094 2.85360813141 -1.66713732597e-07
+v -2.78626155853 -2.10000014305 -2.78626132011
+v -2.78626251221 -2.10000014305 2.78626084328
+v 2.7862610817 -2.09999966621 2.78626155853
+v 2.78626132011 -2.09999966621 -2.78626179695
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 1.0 1.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 1.0 1.0 0.0
+vt 0.0 1.0 0.0
+vt 0.0 0.0 0.0
+vt 1.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 1.0 1.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 1.0 1.0 0.0
+vt 0.0 1.0 0.0
+vt 0.0 0.0 0.0
+vt 1.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 1.0 1.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 1.0 1.0 0.0
+vt 0.0 1.0 0.0
+vt 1.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 1.0 1.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 1.0 1.0 0.0
+vt 0.0 1.0 0.0
+vt 0.0 0.0 0.0
+vt 1.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 0.0 0.0
+vt 0.0 1.0 0.0
+vt 0.0 0.0 0.0
+vt 1.0 0.0 0.0
+vt 1.0 1.0 0.0
+vn -0.323962181807 -0.888874053955 -0.323962181807
+vn 0.323962181807 -0.888874053955 -0.323962181807
+vn 0.0 -0.490656763315 -0.8713529706
+vn 0.0 -0.490656763315 -0.8713529706
+vn 0.707106769085 0.0 -0.707106769085
+vn -0.323962181807 -0.888874053955 -0.323962181807
+vn 0.0 -0.490656763315 -0.8713529706
+vn 0.0 -0.490656763315 -0.8713529706
+vn 0.323962181807 -0.888874053955 -0.323962181807
+vn 0.707106769085 0.0 -0.707106769085
+vn 0.0 -0.490656763315 -0.8713529706
+vn 0.0 -0.490656763315 -0.8713529706
+vn 0.0 -0.490656763315 -0.8713529706
+vn 0.0 -0.490656763315 -0.8713529706
+vn 0.0 -0.490656763315 -0.8713529706
+vn 0.323962181807 -0.888874053955 -0.323962181807
+vn 0.323958963156 -0.888865232468 0.323989480734
+vn 0.8713529706 -0.490656763315 0.0
+vn 0.8713529706 -0.490656763315 0.0
+vn 0.323958963156 -0.888865232468 0.323989480734
+vn 0.707106769085 0.0 -0.707106769085
+vn 0.871339857578 -0.49067991972 0.0
+vn 0.8713529706 -0.490656763315 0.0
+vn 0.707106769085 0.0 -0.707106769085
+vn 0.323962181807 -0.888874053955 -0.323962181807
+vn 0.8713529706 -0.490656763315 0.0
+vn 0.871339857578 -0.49067991972 0.0
+vn 0.8713529706 -0.490656763315 0.0
+vn 0.8713529706 -0.490656763315 0.0
+vn 0.871339857578 -0.49067991972 0.0
+vn 0.323958963156 -0.888865232468 0.323989480734
+vn -0.323962181807 -0.888874053955 0.323962181807
+vn 0.0 -0.490656763315 0.8713529706
+vn 0.0 -0.490656763315 0.8713529706
+vn -0.323962181807 -0.888874053955 0.323962181807
+vn 0.707106769085 0.0 -0.707106769085
+vn 0.0 -0.490656763315 0.8713529706
+vn 0.0 -0.490656763315 0.8713529706
+vn 0.707106769085 0.0 -0.707106769085
+vn 0.323958963156 -0.888865232468 0.323989480734
+vn 0.0 -0.490656763315 0.8713529706
+vn 0.0 -0.490656763315 0.8713529706
+vn 0.0 -0.490656763315 0.8713529706
+vn 0.0 -0.490656763315 0.8713529706
+vn 0.0 -0.490656763315 0.8713529706
+vn -0.323962181807 -0.888874053955 0.323962181807
+vn -0.323962181807 -0.888874053955 -0.323962181807
+vn -0.8713529706 -0.490656763315 0.0
+vn -0.8713529706 -0.490656763315 0.0
+vn 0.707106769085 0.0 -0.707106769085
+vn -0.323962181807 -0.888874053955 0.323962181807
+vn -0.8713529706 -0.490656763315 0.0
+vn -0.8713529706 -0.490656763315 0.0
+vn -0.323962181807 -0.888874053955 -0.323962181807
+vn 0.707106769085 0.0 -0.707106769085
+vn -0.8713529706 -0.490656763315 0.0
+vn -0.8713529706 -0.490656763315 0.0
+vn -0.8713529706 -0.490656763315 0.0
+vn -0.8713529706 -0.490656763315 0.0
+vn -0.8713529706 -0.490656763315 0.0
+vn 0.323958963156 -0.888865232468 0.323989480734
+vn 0.323962181807 -0.888874053955 -0.323962181807
+vn 0.0 1.0 0.0
+vn 0.0 1.0 0.0
+vn 0.323962181807 -0.888874053955 -0.323962181807
+vn -0.323962181807 -0.888874053955 -0.323962181807
+vn 0.0 1.0 0.0
+vn 0.0 1.0 0.0
+vn -0.323962181807 -0.888874053955 -0.323962181807
+vn -0.323962181807 -0.888874053955 0.323962181807
+vn 0.0 1.0 0.0
+vn 0.0 1.0 0.0
+vn -0.323962181807 -0.888874053955 0.323962181807
+vn 0.323958963156 -0.888865232468 0.323989480734
+vn 0.0 1.0 0.0
+vn 0.0 1.0 0.0
+vn 0.0 1.0 0.0
+vn 0.0 1.0 0.0
+vn 0.0 1.0 0.0
+vn 0.0 1.0 0.0
+f 3/1/1 2/2/2 6/3/3 7/4/4 
+f 5/5/5 3/6/6 7/7/7 8/8/8 
+f 2/9/9 5/10/10 8/11/11 6/12/12 
+f 6/13/13 7/14/14 8/15/15 
+f 2/16/16 1/17/17 9/18/18 10/19/19 
+f 1/20/20 5/21/21 11/22/22 9/23/23 
+f 5/24/24 2/25/25 10/26/26 11/27/27 
+f 9/28/28 10/29/29 11/30/30 
+f 1/31/31 4/32/32 13/33/33 12/34/34 
+f 4/35/35 5/36/36 14/37/37 13/38/38 
+f 5/39/39 1/40/40 12/41/41 14/42/42 
+f 12/43/43 14/44/44 13/45/45 
+f 4/46/46 3/47/47 15/48/48 16/49/49 
+f 5/50/50 4/51/51 16/52/52 17/53/53 
+f 3/54/54 5/55/55 17/56/56 15/57/57 
+f 15/58/58 16/59/59 17/60/60 
+f 1/61/61 2/62/62 19/63/63 18/64/64 
+f 2/65/65 3/66/66 20/67/67 19/68/68 
+f 3/69/69 4/70/70 21/71/71 20/72/72 
+f 4/73/73 1/74/74 18/75/75 21/76/76 
+f 19/77/77 18/78/78 21/79/79 20/80/80 
+`
+
 const _OPAQUE_VS = `#version 300 es
 precision highp float;
 
@@ -240,6 +453,21 @@ void main(void) {
   out_Position = vWSPosition;
 }
 `;
+
+function* triangulate(elements) {
+    if (elements.length <= 3) {
+        yield elements;
+    }
+    else if (elements.length === 4) {
+        yield [elements[0], elements[1], elements[2]];
+        yield [elements[2], elements[3], elements[0]];
+    }
+    else {
+        for (let i = 1; i < elements.length - 1; i++) {
+            yield [elements[0], elements[i], elements[i + 1]];
+        }
+    }
+}
 
 class Shader {
     constructor(vsrc, fsrc, defines) {
@@ -506,10 +734,10 @@ class Texture {
 class Mesh {
     // в конструкторе происходит вызов абстрактного метода OnInit
     // этот метод варьируется в зависимости от меша, который мы хотим вывести в мир (кубик/шар и т.д.)
-    constructor() {
+    constructor(objectData, options) {
         this._buffers = {};
 
-        this._OnInit();
+        this._OnInit(objectData, options);
     }
 
     // запись данных в буфер по названию буфера
@@ -621,11 +849,11 @@ class MeshInstance {
 
 // собственно кубик
 class Cube extends Mesh {
-    constructor() {
-        super();
+    constructor(objectData, options) {
+        super(objectData, options);
     }
 
-    _OnInit() {
+    _OnInit(objectData, options) {
         const positions = [
             // передняя сторона
             -1.0, -1.0, 1.0,
@@ -824,11 +1052,11 @@ class Cube extends Mesh {
 
 // простой четырехугольник
 class Quad extends Mesh {
-    constructor() {
-        super();
+    constructor(objectData, options) {
+        super(objectData, options);
     }
 
-    _OnInit() {
+    _OnInit(objectData, options) {
         const positions = [
             -0.5, -0.5, 1.0,
             0.5, -0.5, 1.0,
@@ -867,6 +1095,325 @@ class Quad extends Mesh {
         this._BufferData({ size: 3, data: tangents }, 'tangents');
         this._BufferData({ size: 2, data: uvs }, 'uvs');
         this._BufferData({ data: indices }, 'index');
+    }
+}
+
+class CustomMesh extends Mesh {
+    constructor(objectData, options) {
+        super(objectData, options);
+    }
+
+    _OnInit(objectData, options) {
+        this._buffers = {};
+        this.name = "";
+        this.indicesPerMaterial = [];
+        this.materialsByIndex = {};
+        this.tangents = [];
+        this.bitangents = [];
+        options = options || {};
+        options.materials = options.materials || {};
+        options.enableWTextureCoord = !!options.enableWTextureCoord;
+        // the list of unique vertex, normal, texture, attributes
+        this.vertexNormals = [];
+        this.textures = [];
+        // the indicies to draw the faces
+        this.indices = [];
+        this.textureStride = options.enableWTextureCoord ? 3 : 2;
+
+        const verts = [];
+        const vertNormals = [];
+        const textures = [];
+        const materialNamesByIndex = [];
+        const materialIndicesByName = {};
+        // keep track of what material we've seen last
+        let currentMaterialIndex = -1;
+        let currentObjectByMaterialIndex = 0;
+        // unpacking stuff
+        const unpacked = {
+            verts: [],
+            norms: [],
+            textures: [],
+            hashindices: {},
+            indices: [[]],
+            materialIndices: [],
+            index: 0,
+        };
+        const VERTEX_RE = /^v\s/;
+        const NORMAL_RE = /^vn\s/;
+        const TEXTURE_RE = /^vt\s/;
+        const FACE_RE = /^f\s/;
+        const WHITESPACE_RE = /\s+/;
+        const USE_MATERIAL_RE = /^usemtl/;
+        // array of lines separated by the newline
+        const lines = objectData.split("\n");
+        for (let line of lines) {
+            line = line.trim();
+            if (!line || line.startsWith("#")) {
+                continue;
+            }
+            const elements = line.split(WHITESPACE_RE);
+            elements.shift();
+            if (VERTEX_RE.test(line)) {
+                // if this is a vertex
+                verts.push(...elements);
+            }
+            else if (NORMAL_RE.test(line)) {
+                // if this is a vertex normal
+                vertNormals.push(...elements);
+            }
+            else if (TEXTURE_RE.test(line)) {
+                let coords = elements;
+                // by default, the loader will only look at the U and V
+                // coordinates of the vt declaration. So, this truncates the
+                // elements to only those 2 values. If W texture coordinate
+                // support is enabled, then the texture coordinate is
+                // expected to have three values in it.
+                if (elements.length > 2 && !options.enableWTextureCoord) {
+                    coords = elements.slice(0, 2);
+                }
+                else if (elements.length === 2 && options.enableWTextureCoord) {
+                    // If for some reason W texture coordinate support is enabled
+                    // and only the U and V coordinates are given, then we supply
+                    // the default value of 0 so that the stride length is correct
+                    // when the textures are unpacked below.
+                    coords.push("0");
+                }
+                textures.push(...coords);
+            }
+            else if (USE_MATERIAL_RE.test(line)) {
+                const materialName = elements[0];
+                // check to see if we've ever seen it before
+                if (!(materialName in materialIndicesByName)) {
+                    // new material we've never seen
+                    materialNamesByIndex.push(materialName);
+                    materialIndicesByName[materialName] = materialNamesByIndex.length - 1;
+                    // push new array into indices
+                    // already contains an array at index zero, don't add
+                    if (materialIndicesByName[materialName] > 0) {
+                        unpacked.indices.push([]);
+                    }
+                }
+                // keep track of the current material index
+                currentMaterialIndex = materialIndicesByName[materialName];
+                // update current index array
+                currentObjectByMaterialIndex = currentMaterialIndex;
+            }
+            else if (FACE_RE.test(line)) {
+                // if this is a face
+                /*
+                split this face into an array of Vertex groups
+                for example:
+                   f 16/92/11 14/101/22 1/69/1
+                becomes:
+                  ['16/92/11', '14/101/22', '1/69/1'];
+                */
+                const triangles = triangulate(elements);
+                for (const triangle of triangles) {
+                    for (let j = 0, eleLen = triangle.length; j < eleLen; j++) {
+                        const hash = triangle[j] + "," + currentMaterialIndex;
+                        if (hash in unpacked.hashindices) {
+                            unpacked.indices[currentObjectByMaterialIndex].push(unpacked.hashindices[hash]);
+                        }
+                        else {
+                            /*
+                        Each element of the face line array is a Vertex which has its
+                        attributes delimited by a forward slash. This will separate
+                        each attribute into another array:
+                            '19/92/11'
+                        becomes:
+                            Vertex = ['19', '92', '11'];
+                        where
+                            Vertex[0] is the vertex index
+                            Vertex[1] is the texture index
+                            Vertex[2] is the normal index
+                         Think of faces having Vertices which are comprised of the
+                         attributes location (v), texture (vt), and normal (vn).
+                         */
+                            const vertex = triangle[j].split("/");
+                            // it's possible for faces to only specify the vertex
+                            // and the normal. In this case, vertex will only have
+                            // a length of 2 and not 3 and the normal will be the
+                            // second item in the list with an index of 1.
+                            const normalIndex = vertex.length - 1;
+                            // Vertex position
+                            unpacked.verts.push(+verts[(+vertex[0] - 1) * 3 + 0]);
+                            unpacked.verts.push(+verts[(+vertex[0] - 1) * 3 + 1]);
+                            unpacked.verts.push(+verts[(+vertex[0] - 1) * 3 + 2]);
+                            // Vertex textures
+                            if (textures.length) {
+                                const stride = options.enableWTextureCoord ? 3 : 2;
+                                unpacked.textures.push(+textures[(+vertex[1] - 1) * stride + 0]);
+                                unpacked.textures.push(+textures[(+vertex[1] - 1) * stride + 1]);
+                                if (options.enableWTextureCoord) {
+                                    unpacked.textures.push(+textures[(+vertex[1] - 1) * stride + 2]);
+                                }
+                            }
+                            // Vertex normals
+                            unpacked.norms.push(+vertNormals[(+vertex[normalIndex] - 1) * 3 + 0]);
+                            unpacked.norms.push(+vertNormals[(+vertex[normalIndex] - 1) * 3 + 1]);
+                            unpacked.norms.push(+vertNormals[(+vertex[normalIndex] - 1) * 3 + 2]);
+                            // Vertex material indices
+                            unpacked.materialIndices.push(currentMaterialIndex);
+                            // add the newly created Vertex to the list of indices
+                            unpacked.hashindices[hash] = unpacked.index;
+                            unpacked.indices[currentObjectByMaterialIndex].push(unpacked.hashindices[hash]);
+                            // increment the counter
+                            unpacked.index += 1;
+                        }
+                    }
+                }
+            }
+        }
+        this.vertices = unpacked.verts;
+        this.vertexNormals = unpacked.norms;
+        this.textures = unpacked.textures;
+        this.vertexMaterialIndices = unpacked.materialIndices;
+        this.indices = unpacked.indices[currentObjectByMaterialIndex];
+        this.indicesPerMaterial = unpacked.indices;
+        this.materialNames = materialNamesByIndex;
+        this.materialIndices = materialIndicesByName;
+        this.materialsByIndex = {};
+        this.calculateTangentsAndBitangents();
+
+        this._BufferData({ size: 3, data: this.vertices }, 'positions');
+        this._BufferData({ size: 3, data: this.vertexNormals }, 'normals');
+        this._BufferData({ size: 3, data: this.tangents }, 'tangents');
+        this._BufferData({ size: 2, data: this.textures }, 'uvs');
+        this._BufferData({ data: this.indices }, 'index');
+    }
+    
+    calculateTangentsAndBitangents() {
+    //    console.log(this.vertices);
+    //    console.log(this.vertices.length);
+    //    console.log(this.vertexNormals);
+    //    console.log(this.vertexNormals.length);
+    //    console.log(this.textures);
+    //    console.log(this.textures.length);
+        console.assert(!!(this.vertices &&
+            this.vertices.length &&
+            this.vertexNormals &&
+            this.vertexNormals.length &&
+            this.textures &&
+            this.textures.length), "Missing attributes for calculating tangents and bitangents");
+        const unpacked = {
+            tangents: [...new Array(this.vertices.length)].map(_ => 0),
+            bitangents: [...new Array(this.vertices.length)].map(_ => 0),
+        };
+        // Loop through all faces in the whole mesh
+        const indices = this.indices;
+        const vertices = this.vertices;
+        const normals = this.vertexNormals;
+        const uvs = this.textures;
+        for (let i = 0; i < indices.length; i += 3) {
+            const i0 = indices[i + 0];
+            const i1 = indices[i + 1];
+            const i2 = indices[i + 2];
+            const x_v0 = vertices[i0 * 3 + 0];
+            const y_v0 = vertices[i0 * 3 + 1];
+            const z_v0 = vertices[i0 * 3 + 2];
+            const x_uv0 = uvs[i0 * 2 + 0];
+            const y_uv0 = uvs[i0 * 2 + 1];
+            const x_v1 = vertices[i1 * 3 + 0];
+            const y_v1 = vertices[i1 * 3 + 1];
+            const z_v1 = vertices[i1 * 3 + 2];
+            const x_uv1 = uvs[i1 * 2 + 0];
+            const y_uv1 = uvs[i1 * 2 + 1];
+            const x_v2 = vertices[i2 * 3 + 0];
+            const y_v2 = vertices[i2 * 3 + 1];
+            const z_v2 = vertices[i2 * 3 + 2];
+            const x_uv2 = uvs[i2 * 2 + 0];
+            const y_uv2 = uvs[i2 * 2 + 1];
+            const x_deltaPos1 = x_v1 - x_v0;
+            const y_deltaPos1 = y_v1 - y_v0;
+            const z_deltaPos1 = z_v1 - z_v0;
+            const x_deltaPos2 = x_v2 - x_v0;
+            const y_deltaPos2 = y_v2 - y_v0;
+            const z_deltaPos2 = z_v2 - z_v0;
+            const x_uvDeltaPos1 = x_uv1 - x_uv0;
+            const y_uvDeltaPos1 = y_uv1 - y_uv0;
+            const x_uvDeltaPos2 = x_uv2 - x_uv0;
+            const y_uvDeltaPos2 = y_uv2 - y_uv0;
+            const rInv = x_uvDeltaPos1 * y_uvDeltaPos2 - y_uvDeltaPos1 * x_uvDeltaPos2;
+            const r = 1.0 / Math.abs(rInv < 0.0001 ? 1.0 : rInv);
+            // Tangent
+            const x_tangent = (x_deltaPos1 * y_uvDeltaPos2 - x_deltaPos2 * y_uvDeltaPos1) * r;
+            const y_tangent = (y_deltaPos1 * y_uvDeltaPos2 - y_deltaPos2 * y_uvDeltaPos1) * r;
+            const z_tangent = (z_deltaPos1 * y_uvDeltaPos2 - z_deltaPos2 * y_uvDeltaPos1) * r;
+            // Bitangent
+            const x_bitangent = (x_deltaPos2 * x_uvDeltaPos1 - x_deltaPos1 * x_uvDeltaPos2) * r;
+            const y_bitangent = (y_deltaPos2 * x_uvDeltaPos1 - y_deltaPos1 * x_uvDeltaPos2) * r;
+            const z_bitangent = (z_deltaPos2 * x_uvDeltaPos1 - z_deltaPos1 * x_uvDeltaPos2) * r;
+            // Gram-Schmidt orthogonalize
+            //t = glm::normalize(t - n * glm:: dot(n, t));
+            const x_n0 = normals[i0 * 3 + 0];
+            const y_n0 = normals[i0 * 3 + 1];
+            const z_n0 = normals[i0 * 3 + 2];
+            const x_n1 = normals[i1 * 3 + 0];
+            const y_n1 = normals[i1 * 3 + 1];
+            const z_n1 = normals[i1 * 3 + 2];
+            const x_n2 = normals[i2 * 3 + 0];
+            const y_n2 = normals[i2 * 3 + 1];
+            const z_n2 = normals[i2 * 3 + 2];
+            // Tangent
+            const n0_dot_t = x_tangent * x_n0 + y_tangent * y_n0 + z_tangent * z_n0;
+            const n1_dot_t = x_tangent * x_n1 + y_tangent * y_n1 + z_tangent * z_n1;
+            const n2_dot_t = x_tangent * x_n2 + y_tangent * y_n2 + z_tangent * z_n2;
+            const x_resTangent0 = x_tangent - x_n0 * n0_dot_t;
+            const y_resTangent0 = y_tangent - y_n0 * n0_dot_t;
+            const z_resTangent0 = z_tangent - z_n0 * n0_dot_t;
+            const x_resTangent1 = x_tangent - x_n1 * n1_dot_t;
+            const y_resTangent1 = y_tangent - y_n1 * n1_dot_t;
+            const z_resTangent1 = z_tangent - z_n1 * n1_dot_t;
+            const x_resTangent2 = x_tangent - x_n2 * n2_dot_t;
+            const y_resTangent2 = y_tangent - y_n2 * n2_dot_t;
+            const z_resTangent2 = z_tangent - z_n2 * n2_dot_t;
+            const magTangent0 = Math.sqrt(x_resTangent0 * x_resTangent0 + y_resTangent0 * y_resTangent0 + z_resTangent0 * z_resTangent0);
+            const magTangent1 = Math.sqrt(x_resTangent1 * x_resTangent1 + y_resTangent1 * y_resTangent1 + z_resTangent1 * z_resTangent1);
+            const magTangent2 = Math.sqrt(x_resTangent2 * x_resTangent2 + y_resTangent2 * y_resTangent2 + z_resTangent2 * z_resTangent2);
+            // Bitangent
+            const n0_dot_bt = x_bitangent * x_n0 + y_bitangent * y_n0 + z_bitangent * z_n0;
+            const n1_dot_bt = x_bitangent * x_n1 + y_bitangent * y_n1 + z_bitangent * z_n1;
+            const n2_dot_bt = x_bitangent * x_n2 + y_bitangent * y_n2 + z_bitangent * z_n2;
+            const x_resBitangent0 = x_bitangent - x_n0 * n0_dot_bt;
+            const y_resBitangent0 = y_bitangent - y_n0 * n0_dot_bt;
+            const z_resBitangent0 = z_bitangent - z_n0 * n0_dot_bt;
+            const x_resBitangent1 = x_bitangent - x_n1 * n1_dot_bt;
+            const y_resBitangent1 = y_bitangent - y_n1 * n1_dot_bt;
+            const z_resBitangent1 = z_bitangent - z_n1 * n1_dot_bt;
+            const x_resBitangent2 = x_bitangent - x_n2 * n2_dot_bt;
+            const y_resBitangent2 = y_bitangent - y_n2 * n2_dot_bt;
+            const z_resBitangent2 = z_bitangent - z_n2 * n2_dot_bt;
+            const magBitangent0 = Math.sqrt(x_resBitangent0 * x_resBitangent0 +
+                y_resBitangent0 * y_resBitangent0 +
+                z_resBitangent0 * z_resBitangent0);
+            const magBitangent1 = Math.sqrt(x_resBitangent1 * x_resBitangent1 +
+                y_resBitangent1 * y_resBitangent1 +
+                z_resBitangent1 * z_resBitangent1);
+            const magBitangent2 = Math.sqrt(x_resBitangent2 * x_resBitangent2 +
+                y_resBitangent2 * y_resBitangent2 +
+                z_resBitangent2 * z_resBitangent2);
+            unpacked.tangents[i0 * 3 + 0] += x_resTangent0 / magTangent0;
+            unpacked.tangents[i0 * 3 + 1] += y_resTangent0 / magTangent0;
+            unpacked.tangents[i0 * 3 + 2] += z_resTangent0 / magTangent0;
+            unpacked.tangents[i1 * 3 + 0] += x_resTangent1 / magTangent1;
+            unpacked.tangents[i1 * 3 + 1] += y_resTangent1 / magTangent1;
+            unpacked.tangents[i1 * 3 + 2] += z_resTangent1 / magTangent1;
+            unpacked.tangents[i2 * 3 + 0] += x_resTangent2 / magTangent2;
+            unpacked.tangents[i2 * 3 + 1] += y_resTangent2 / magTangent2;
+            unpacked.tangents[i2 * 3 + 2] += z_resTangent2 / magTangent2;
+            unpacked.bitangents[i0 * 3 + 0] += x_resBitangent0 / magBitangent0;
+            unpacked.bitangents[i0 * 3 + 1] += y_resBitangent0 / magBitangent0;
+            unpacked.bitangents[i0 * 3 + 2] += z_resBitangent0 / magBitangent0;
+            unpacked.bitangents[i1 * 3 + 0] += x_resBitangent1 / magBitangent1;
+            unpacked.bitangents[i1 * 3 + 1] += y_resBitangent1 / magBitangent1;
+            unpacked.bitangents[i1 * 3 + 2] += z_resBitangent1 / magBitangent1;
+            unpacked.bitangents[i2 * 3 + 0] += x_resBitangent2 / magBitangent2;
+            unpacked.bitangents[i2 * 3 + 1] += y_resBitangent2 / magBitangent2;
+            unpacked.bitangents[i2 * 3 + 2] += z_resBitangent2 / magBitangent2;
+            // TODO: check handedness
+        }
+        this.tangents = unpacked.tangents;
+        this.bitangents = unpacked.bitangents;
     }
 }
 
@@ -1473,15 +2020,28 @@ class LabDemo {
 
         for (let x = -5; x < 5; x++) {
             for (let y = 0; y < 10; y++) {
-                let m = this._renderer.CreateMeshInstance(
-                    new Cube(),
-                    {
-                        shader: 'default',
-                        params: {
-                            diffuseTexture: 'test-diffuse',
-                            normalTexture: 'test-normal',
-                        }
-                    });
+                let m;
+                if (y == 5) {
+                    m = this._renderer.CreateMeshInstance(
+                        new CustomMesh(pyramidObj),
+                        {
+                            shader: 'default',
+                            params: {
+                                diffuseTexture: 'worn-bumpy-rock-albedo',
+                                normalTexture: 'worn-bumpy-rock-normal',
+                            }
+                        });
+                } else {
+                    m = this._renderer.CreateMeshInstance(
+                        new Cube(),
+                        {
+                            shader: 'default',
+                            params: {
+                                diffuseTexture: 'test-diffuse',
+                                normalTexture: 'test-normal',
+                            }
+                        });
+                }
                 m.SetPosition(x * 4, 0, -y * 4);
 
                 this._meshes.push(m);
